@@ -1,5 +1,5 @@
 // Replace this with the email address that should receive booking requests.
-const BOOKING_EMAIL = "YOUR_EMAIL_HERE";
+const BOOKING_EMAIL = "events@thehutbayarea.com";
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 toggle.addEventListener("click", () => {
@@ -15,7 +15,7 @@ document.getElementById("booking-form").addEventListener("submit", e => {
   e.preventDefault();
   const d = new FormData(e.currentTarget);
   const status = document.getElementById("status");
-  if (BOOKING_EMAIL === "YOUR_EMAIL_HERE") {
+  if (BOOKING_EMAIL === "events@thehutbayarea.com") {
     status.textContent = "Add your booking email in script.js before publishing to receive requests.";
     return;
   }
