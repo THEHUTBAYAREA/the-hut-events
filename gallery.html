@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Photos and videos from The Hut events and celebrations in Vallejo.">
+  <meta name="theme-color" content="#050505">
+  <title>Gallery | The Hut Events &amp; Venue</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="wordmark" href="index.html#home">THE HUT</a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="nav">☰ MENU</button>
+  <nav id="nav" class="nav">
+    <a href="index.html#home">Home</a><a href="index.html#events">Events</a>
+    <a href="index.html#rentals">Venue Rentals</a><a class="active" href="gallery.html">Gallery</a>
+    <a class="book-link" href="index.html#book">Book Now</a><a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+<main class="gallery-page">
+  <div class="section-head">
+    <h1>PHOTO &amp; VIDEO <i>GALLERY</i></h1>
+    <p>Moments from parties, celebrations and community events in Vallejo.</p>
+  </div>
+  <div class="media-grid">
+    <figure class="media-card"><div class="media-frame photo-frame"><span>PHOTOS COMING SOON</span></div><figcaption>Event photos</figcaption></figure>
+    <figure class="media-card"><div class="media-frame video-frame"><span>VIDEOS COMING SOON</span></div><figcaption>Event videos</figcaption></figure>
+    <figure class="media-card"><div class="media-frame photo-frame"><span>PHOTOS COMING SOON</span></div><figcaption>Celebrations at The Hut</figcaption></figure>
+    <figure class="media-card"><div class="media-frame video-frame"><span>VIDEOS COMING SOON</span></div><figcaption>Highlights</figcaption></figure>
+    <figure class="media-card"><div class="media-frame photo-frame"><span>PHOTOS COMING SOON</span></div><figcaption>Community events</figcaption></figure>
+    <figure class="media-card"><div class="media-frame photo-frame"><span>PHOTOS COMING SOON</span></div><figcaption>Venue moments</figcaption></figure>
+  </div>
+  <p class="gallery-back"><a class="gold-button" href="index.html#home">BACK TO THE HUT <span>›</span></a></p>
+</main>
+<footer class="gallery-footer"><div class="copyright">© The Hut Events &amp; Venue. All rights reserved.</div></footer>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav");
+toggle.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(open));
+});
+nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  nav.classList.remove("open");
+  toggle.setAttribute("aria-expanded", "false");
+}));
+</script>
+</body>
+</html>

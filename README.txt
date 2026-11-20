@@ -1,24 +1,20 @@
 THE HUT — BUILD WITH THE NEW BUILDING LOGO
 
-This version uses your newly supplied building logo as the main brand artwork and keeps the same black, red, green and gold visual style.
+This version uses the supplied building logo and keeps the black, red, green and gold visual style.
 
 Files:
-- index.html — responsive website pages/sections
+- index.html — homepage, events, venue rentals, booking form and contact details
+- gallery.html — separate photo and video gallery page
 - styles.css — visual design and mobile layout
 - script.js — mobile menu and booking request form
-- assets/the-hut-building-logo.jpg — your supplied logo
+- assets/the-hut-building-logo.jpg — supplied logo
 
 Preview locally:
   python -m http.server 8000
 Then open http://localhost:8000
 
-Before launch:
-1. Replace YOUR_EMAIL_HERE in script.js with your booking email.
-2. Add the venue's actual phone, email and address in the footer.
-3. Replace sample event copy and gallery content with current events and real venue photos.
-4. Upload the full folder to your web host.
+As media becomes available:
+1. Replace the photo and video placeholders in gallery.html with real event photos and videos.
+2. Replace the sample event descriptions with current event details.
 
-Booking form:
-The starter form opens the visitor's email app (mailto). It does not store submissions on a server. For reliable online booking submissions, connect a form service or backend.
-
-The logo image is used as supplied; its lettering, roof and colors have not been altered.
+The booking form opens the visitor's email app (mailto) using the configured booking email. It does not store submissions on a server.
