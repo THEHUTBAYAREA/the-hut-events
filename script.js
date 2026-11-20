@@ -15,7 +15,7 @@ document.getElementById("booking-form").addEventListener("submit", e => {
   e.preventDefault();
   const d = new FormData(e.currentTarget);
   const status = document.getElementById("status");
-  if (BOOKING_EMAIL === "events@thehutbayarea.com") {
+  if (!BOOKING_EMAIL) {
     status.textContent = "Add your booking email in script.js before publishing to receive requests.";
     return;
   }
