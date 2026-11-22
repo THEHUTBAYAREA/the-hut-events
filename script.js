@@ -61,21 +61,32 @@ if (form) {
         body: JSON.stringify(booking),
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result = {};
+
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        result = { error: responseText || "The server returned an empty response." };
+      }
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || "Submission failed");
+        throw new Error(
+          result.error || `Request failed with status ${response.status}`
+        );
       }
+      
 
       status.textContent = result.email_sent
         ? "Thank you! Your booking request was received."
         : "Your booking was saved. Please contact us if you need confirmation.";
 
+      status.textContent = `Booking failed: ${error.message}`;
+
       form.reset();
     } catch (error) {
       console.error("Booking submission failed:", error);
-      status.textContent =
-        "We couldn't submit your request. Please try again or email events@thehutbayarea.com.";
+      
     } finally {
       if (button) button.disabled = false;
     }
