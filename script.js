@@ -80,12 +80,15 @@ if (form) {
       status.textContent = result.email_sent
         ? "Thank you! Your booking request was received."
         : "Your booking was saved. Please contact us if you need confirmation.";
-
-      status.textContent = `Booking failed: ${error.message}`;
+  
 
       form.reset();
+    
     } catch (error) {
       console.error("Booking submission failed:", error);
+      status.textContent = `Booking failed: ${error.message}`;
+    } finally {
+
       
     } finally {
       if (button) button.disabled = false;
