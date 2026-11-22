@@ -35,11 +35,6 @@ if (form) {
     const status = document.getElementById("status");
     const button = form.querySelector('[type="submit"]');
 
-    if (SUPABASE_PUBLISHABLE_KEY === "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_y4XqdOJ1") {
-      status.textContent = "Booking form setup is incomplete. Please contact us directly.";
-      return;
-    }
-
     const d = new FormData(form);
 
     const booking = {
