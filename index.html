@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,24 +14,37 @@
   <a class="wordmark" href="#home">THE HUT</a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="nav">☰ MENU</button>
   <nav id="nav" class="nav">
-    <a class="active" href="#home">Home</a><a href="#events">Events</a>
-    <a href="#rentals">Venue Rentals</a><a href="gallery.html">Gallery</a>
-    <a class="book-link" href="#book">Book Now</a><a href="#contact">Contact</a>
+    <a class="active" href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#rentals">Venue Rentals</a>
+    <a href="gallery.html">Gallery</a>
+    <a class="book-link" href="#book">Book Now</a>
+    <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <main>
 <section id="home" class="hero">
-  <div class="paint paint-red"></div><div class="paint paint-green"></div><div class="paint paint-gold"></div>
-  <div class="spot spot-left"></div><div class="spot spot-right"></div>
+  <div class="paint paint-red"></div>
+  <div class="paint paint-green"></div>
+  <div class="paint paint-gold"></div>
+  <div class="spot spot-left"></div>
+  <div class="spot spot-right"></div>
+
   <div class="hero-logo-wrap">
-    <img class="hero-logo" src="assets/the-hut-building-logo.png" alt="The Hut logo featuring the venue building with red, green and black roof shingles">
+    <img class="hero-logo"
+      src="assets/the-hut-building-logo.png"
+      alt="The Hut venue logo">
   </div>
+
   <div class="hero-caption">
     <div class="title-strip"><span>EVENTS &amp; VENUE</span></div>
     <p>PARTIES <b>•</b> EVENTS <b>•</b> CELEBRATIONS <b>•</b> MORE</p>
-    <a class="gold-button" href="#book">BOOK YOUR EVENT TODAY <span>›</span></a>
+    <a class="gold-button" href="#book">
+      BOOK YOUR EVENT TODAY <span>›</span>
+    </a>
   </div>
+
   <div class="quick-links">
     <a href="#events"><span>UPCOMING<br>EVENTS</span></a>
     <a href="#rentals"><span>VENUE<br>RENTALS</span></a>
@@ -40,37 +54,130 @@
 </section>
 
 <section id="events" class="section">
-  <div class="section-head"><small>WHAT'S HAPPENING</small><h1>UPCOMING <i>EVENTS</i></h1><p>Good people. Great energy. Unforgettable moments at The Hut.</p></div>
+  <div class="section-head">
+    <small>WHAT'S HAPPENING</small>
+    <h1>UPCOMING <i>EVENTS</i></h1>
+    <p>Good people. Great energy. Unforgettable moments at The Hut.</p>
+  </div>
+
   <div class="cards">
-    <article><span class="card-symbol">♫</span><h2>Live Events</h2><p>Check back for upcoming parties, DJs, music and special events.</p></article>
-    <article><span class="card-symbol">✦</span><h2>Private Celebrations</h2><p>Bring your people together for birthdays, reunions and celebrations.</p></article>
-    <article><span class="card-symbol">♥</span><h2>Community Events</h2><p>A place to connect, celebrate and make memories together.</p></article>
+    <article>
+      <span class="card-symbol">♫</span>
+      <h2>Live Events</h2>
+      <p>Check back for upcoming parties, DJs, music and special events.</p>
+    </article>
+    <article>
+      <span class="card-symbol">✦</span>
+      <h2>Private Celebrations</h2>
+      <p>Bring your people together for birthdays, reunions and celebrations.</p>
+    </article>
+    <article>
+      <span class="card-symbol">♥</span>
+      <h2>Community Events</h2>
+      <p>A place to connect, celebrate and make memories together.</p>
+    </article>
   </div>
 </section>
 
 <section id="rentals" class="section alternate">
-  <div class="section-head"><small>YOUR EVENT. YOUR WAY.</small><h2>VENUE <i>RENTALS</i></h2><p>Make The Hut the setting for your next celebration.</p></div>
-  <div class="rental-box"><div><strong>THE HUT</strong><h3>MAKE ROOM FOR A GOOD TIME.</h3></div><div><p>Tell us what you're planning, your preferred date and how many guests you're expecting. We'll follow up about availability and rental details.</p><a class="gold-button" href="#book">ASK ABOUT A RENTAL <span>›</span></a></div></div>
+  <div class="section-head">
+    <small>YOUR EVENT. YOUR WAY.</small>
+    <h2>VENUE <i>RENTALS</i></h2>
+    <p>Make The Hut the setting for your next celebration.</p>
+  </div>
+
+  <div class="rental-box">
+    <div>
+      <strong>THE HUT</strong>
+      <h3>MAKE ROOM FOR A GOOD TIME.</h3>
+    </div>
+    <div>
+      <p>Tell us what you're planning, your preferred date and how many guests you're expecting. We'll follow up about availability and rental details.</p>
+      <a class="gold-button" href="#book">
+        ASK ABOUT A RENTAL <span>›</span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <section id="book" class="section alternate">
-  <div class="section-head"><small>LET'S MAKE IT HAPPEN</small><h2>BOOK YOUR <i>EVENT</i></h2><p>Send us the details and we'll get back to you.</p></div>
+  <div class="section-head">
+    <small>LET'S MAKE IT HAPPEN</small>
+    <h2>BOOK YOUR <i>EVENT</i></h2>
+    <p>Send us the details and we'll get back to you.</p>
+  </div>
+
   <form id="booking-form">
-    <div class="form-row"><label>Your name<input name="name" required placeholder="Full name"></label><label>Email address<input type="email" name="email" required placeholder="you@example.com"></label></div>
-    <div class="form-row"><label>Phone number<input type="tel" name="phone" placeholder="(555) 555-5555"></label><label>Event type<select name="type" required><option value="">Choose an event</option><option>Birthday / Celebration</option><option>Private Party</option><option>Community Event</option><option>Venue Rental</option><option>Other</option></select></label></div>
-    <div class="form-row"><label>Preferred date<input type="date" name="date"></label><label>Estimated guests<input type="number" min="1" name="guests" placeholder="Number of guests"></label></div>
-    <label>Tell us about your event<textarea name="details" rows="4" placeholder="What are you planning?"></textarea></label>
-    <button class="gold-button" type="submit">SEND BOOKING REQUEST <span>›</span></button>
+    <div class="form-row">
+      <label>Your name
+        <input name="name" required placeholder="Full name">
+      </label>
+      <label>Email address
+        <input type="email" name="email" required placeholder="you@example.com">
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>Phone number
+        <input type="tel" name="phone" placeholder="(555) 555-5555">
+      </label>
+      <label>Event type
+        <select name="type" required>
+          <option value="">Choose an event</option>
+          <option>Birthday / Celebration</option>
+          <option>Private Party</option>
+          <option>Community Event</option>
+          <option>Venue Rental</option>
+          <option>Other</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>Preferred date
+        <input type="date" name="date">
+      </label>
+      <label>Estimated guests
+        <input type="number" min="1" name="guests" placeholder="Number of guests">
+      </label>
+    </div>
+
+    <label>Tell us about your event
+      <textarea name="details" rows="4" placeholder="What are you planning?"></textarea>
+    </label>
+
+    <button class="gold-button" type="submit">
+      SEND BOOKING REQUEST <span>›</span>
+    </button>
+
     <p id="status" class="status" role="status" aria-live="polite"></p>
-    <p class="hint">Set your booking email in script.js before publishing.</p>
+    <p class="hint">For help with a booking, email events@thehutbayarea.com.</p>
   </form>
 </section>
 </main>
 
 <footer id="contact">
-  <div class="footer-logo">THE HUT <span>EVENTS &amp; VENUE</span><p>PARTIES • EVENTS • CELEBRATIONS • MORE</p></div>
-  <div><h2>CONTACT US</h2><p>Questions or ready to plan your event?</p><p><a href="tel:+13692173757">(369) 217-3757</a></p><p><a href="mailto:events@thehutbayarea.com">events@thehutbayarea.com</a></p><p>1010 B Tennessee St<br>Vallejo, CA 94590</p><a href="#book">Send a booking request</a></div>
-  <div class="copyright">© <span id="year"></span> The Hut Events &amp; Venue. All rights reserved.</div>
+  <div class="footer-logo">
+    THE HUT
+    <span>EVENTS &amp; VENUE</span>
+    <p>PARTIES • EVENTS • CELEBRATIONS • MORE</p>
+  </div>
+
+  <div>
+    <h2>CONTACT US</h2>
+    <p>Questions or ready to plan your event?</p>
+    <p><a href="tel:+13692173757">(369) 217-3757</a></p>
+    <p><a href="mailto:events@thehutbayarea.com">events@thehutbayarea.com</a></p>
+    <p>1010 B Tennessee St<br>Vallejo, CA 94590</p>
+    <a href="#book">Send a booking request</a>
+  </div>
+
+  <div class="copyright">
+    © <span id="year"></span> The Hut Events &amp; Venue. All rights reserved.
+  </div>
 </footer>
+
 <script src="script.js?v=20261123"></script>
-</body></html>
+</body>
+</html>
+
