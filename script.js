@@ -36,8 +36,6 @@ const form = document.getElementById("booking-form");
 
 if (form) {
   form.addEventListener("submit", async (e) => {
-    // Prevent the browser's normal form submission, page reload,
-    // and loss of entered information.
     e.preventDefault();
 
     const status = document.getElementById("status");
@@ -69,7 +67,9 @@ if (form) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         apikey: SUPABASE_PUBLISHABLE_KEY,},
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
+          "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        },
         body: JSON.stringify(booking),
       });
 
@@ -100,36 +100,36 @@ if (form) {
         );
       }
 
-      // Do not claim email was sent unless the function confirms it.
       if (result.email_sent === true) {
         if (status) {
           status.textContent =
             "Thank you! Your booking request was received and the email was sent.";
         }
 
-        // Clear the form only after confirmed success.
         form.reset();
       } else {
         if (status) {
           status.textContent =
             "Your booking was accepted, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
         }
-
-        // Keep the entered information because email delivery
-        // was not confirmed.
       }
     } catch (error) {
       console.error("Booking submission failed:", error);
 
       if (status) {
-        status.textContent =
-          `Booking failed: ${error.message || "Unable to contact the booking server."} Your information has not been cleared.`;
-      }
+        const message = error && error.message ? error.message : "";
+        const networkFailure =
+          error instanceof TypeError ||
+          /failed to fetch|networkerror|load failed/i.test(message);
 
-      // Intentionally do not reset the form on failure.
+        status.textContent = networkFailure
+          ? "Booking could not connect to the booking server (network/CORS error). Your information has not been cleared. Please contact events@thehutbayarea.com directly while we restore online booking."
+          : `Booking failed: ${message || "Unable to contact the booking server."} Your information has not been cleared.`;
+      }
     } finally {
       delete form.dataset.submitting;
       if (button) button.disabled = false;
     }
   });
 }
+
