@@ -1,6 +1,6 @@
 
 const BOOKING_FUNCTION_URL =
-  "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processing";
+  "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processor";
 
 // Public Supabase publishable key only.
 // Never put a service-role key or sb_secret_ key in website code.
