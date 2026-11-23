@@ -3,7 +3,7 @@ const BOOKING_FUNCTION_URL =
   "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processor";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_yX4qdOJ1";
+  "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_y4XqdOJ1";
 
 // Mobile navigation
 const toggle = document.querySelector(".menu-toggle");
