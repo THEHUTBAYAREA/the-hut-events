@@ -69,9 +69,7 @@ if (form) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          apikey: SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-        },
+         apikey: SUPABASE_PUBLISHABLE_KEY,},
         body: JSON.stringify(booking),
       });
 
