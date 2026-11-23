@@ -2,9 +2,6 @@
 const BOOKING_FUNCTION_URL =
   "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processor";
 
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_y4XqdOJ1";
-
 // Mobile navigation
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
@@ -62,13 +59,10 @@ if (form) {
     if (button) button.disabled = true;
 
     try {
-      console.log("Submitting booking to:", BOOKING_FUNCTION_URL);
-
       const response = await fetch(BOOKING_FUNCTION_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "apikey": SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify(booking),
       });
@@ -112,7 +106,9 @@ if (form) {
             "Your booking was saved, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
         }
       } else {
-        throw new Error("The server did not confirm that your booking was saved.");
+        throw new Error(
+          "The server did not confirm that your booking was saved."
+        );
       }
     } catch (error) {
       console.error("Booking submission failed:", error);
