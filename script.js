@@ -2,8 +2,6 @@
 const BOOKING_FUNCTION_URL =
   "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processor";
 
-// Public publishable key only.
-// Never put a service-role key or sb_secret_ key in website code.
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_yX4qdOJ1";
 
@@ -42,7 +40,6 @@ if (form) {
     const status = document.getElementById("status");
     const button = form.querySelector('[type="submit"]');
 
-    // Prevent duplicate submissions
     if (form.dataset.submitting === "true") return;
 
     const d = new FormData(form);
@@ -59,92 +56,80 @@ if (form) {
 
     if (status) {
       status.textContent = "Submitting your booking request…";
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
     }
 
     form.dataset.submitting = "true";
-
-    if (button) {
-      button.disabled = true;
-    }
+    if (button) button.disabled = true;
 
     try {
+      console.log("Submitting booking to:", BOOKING_FUNCTION_URL);
+
       const response = await fetch(BOOKING_FUNCTION_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          apikey: SUPABASE_PUBLISHABLE_KEY,
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify(booking),
       });
 
       const responseText = await response.text();
-      let result = {};
+      let result;
 
       try {
         result = responseText ? JSON.parse(responseText) : {};
       } catch {
         throw new Error(
-          `The booking server returned an unreadable response (HTTP ${response.status}).`
+          `Booking server returned unreadable data (HTTP ${response.status}).`
         );
       }
 
       if (!response.ok) {
         throw new Error(
           result.error ||
-            result.message ||
-            `The booking server returned HTTP ${response.status}.`
+          result.message ||
+          `Booking server returned HTTP ${response.status}.`
         );
       }
 
       if (result.success !== true) {
         throw new Error(
           result.error ||
-            result.message ||
-            "The server did not confirm that your booking was saved."
+          result.message ||
+          "The server did not confirm your booking."
         );
       }
 
-      if (result.email_sent === true) {
+      if (result.booking_saved === true && result.email_sent === true) {
         if (status) {
           status.textContent =
-            "Thank you! Your booking request was received and the email was sent.";
+            "Thank you! Your booking request was received and the notification email was sent.";
         }
-
-        // Clear the form only after confirmed success
         form.reset();
       } else if (result.booking_saved === true) {
         if (status) {
           status.textContent =
-            "Your booking request was saved, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
+            "Your booking was saved, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
         }
       } else {
-        throw new Error(
-          "The server response did not confirm that your booking was saved."
-        );
+        throw new Error("The server did not confirm that your booking was saved.");
       }
     } catch (error) {
       console.error("Booking submission failed:", error);
 
       if (status) {
-        const message =
-          error && error.message ? error.message : "";
-
+        const message = error?.message || "";
         const networkFailure =
           error instanceof TypeError ||
           /failed to fetch|networkerror|load failed|cors/i.test(message);
 
         status.textContent = networkFailure
-          ? "Booking could not connect to the booking server (network/CORS error). Your information has not been cleared. Please contact events@thehutbayarea.com directly while we restore online booking."
-          : `Booking failed: ${message || "Unable to contact the booking server."} Your information has not been cleared.`;
+          ? "Unable to connect to the booking server. Your information has not been cleared. Please contact events@thehutbayarea.com."
+          : `Booking failed: ${message} Your information has not been cleared.`;
       }
     } finally {
       delete form.dataset.submitting;
-
-      if (button) {
-        button.disabled = false;
-      }
+      if (button) button.disabled = false;
     }
   });
 }
