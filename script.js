@@ -2,7 +2,7 @@
 const BOOKING_FUNCTION_URL =
   "https://ngfeuohbrdzrmbtefpix.supabase.co/functions/v1/rapid-processor";
 
-// Public Supabase publishable key only.
+// Public publishable key only.
 // Never put a service-role key or sb_secret_ key in website code.
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_bmIZvwV4XmNiTzOyeH-1oQ_yX4qdOJ1";
@@ -27,6 +27,7 @@ if (toggle && nav) {
 
 // Current year
 const year = document.getElementById("year");
+
 if (year) {
   year.textContent = new Date().getFullYear();
 }
@@ -41,34 +42,39 @@ if (form) {
     const status = document.getElementById("status");
     const button = form.querySelector('[type="submit"]');
 
+    // Prevent duplicate submissions
     if (form.dataset.submitting === "true") return;
 
     const d = new FormData(form);
 
     const booking = {
-      name: d.get("name"),
-      email: d.get("email"),
-      phone: d.get("phone"),
-      type: d.get("type"),
-      date: d.get("date"),
-      guests: d.get("guests"),
-      details: d.get("details"),
+      name: String(d.get("name") ?? "").trim(),
+      email: String(d.get("email") ?? "").trim(),
+      phone: String(d.get("phone") ?? "").trim(),
+      type: String(d.get("type") ?? "").trim(),
+      date: String(d.get("date") ?? "").trim(),
+      guests: String(d.get("guests") ?? "").trim(),
+      details: String(d.get("details") ?? "").trim(),
     };
 
     if (status) {
       status.textContent = "Submitting your booking request…";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
     }
 
     form.dataset.submitting = "true";
-    if (button) button.disabled = true;
+
+    if (button) {
+      button.disabled = true;
+    }
 
     try {
       const response = await fetch(BOOKING_FUNCTION_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "apikey": SUPABASE_PUBLISHABLE_KEY,
-          "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+          apikey: SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify(booking),
       });
@@ -80,7 +86,7 @@ if (form) {
         result = responseText ? JSON.parse(responseText) : {};
       } catch {
         throw new Error(
-          `The server returned an unreadable response (HTTP ${response.status}).`
+          `The booking server returned an unreadable response (HTTP ${response.status}).`
         );
       }
 
@@ -106,21 +112,28 @@ if (form) {
             "Thank you! Your booking request was received and the email was sent.";
         }
 
+        // Clear the form only after confirmed success
         form.reset();
-      } else {
+      } else if (result.booking_saved === true) {
         if (status) {
           status.textContent =
-            "Your booking was accepted, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
+            "Your booking request was saved, but email delivery was not confirmed. Please contact events@thehutbayarea.com.";
         }
+      } else {
+        throw new Error(
+          "The server response did not confirm that your booking was saved."
+        );
       }
     } catch (error) {
       console.error("Booking submission failed:", error);
 
       if (status) {
-        const message = error && error.message ? error.message : "";
+        const message =
+          error && error.message ? error.message : "";
+
         const networkFailure =
           error instanceof TypeError ||
-          /failed to fetch|networkerror|load failed/i.test(message);
+          /failed to fetch|networkerror|load failed|cors/i.test(message);
 
         status.textContent = networkFailure
           ? "Booking could not connect to the booking server (network/CORS error). Your information has not been cleared. Please contact events@thehutbayarea.com directly while we restore online booking."
@@ -128,8 +141,10 @@ if (form) {
       }
     } finally {
       delete form.dataset.submitting;
-      if (button) button.disabled = false;
+
+      if (button) {
+        button.disabled = false;
+      }
     }
   });
 }
-
